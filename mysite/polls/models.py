@@ -8,6 +8,7 @@ import datetime
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
+    total_votes = models.IntegerField(default=0)
 
     
 

@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <title>Polls</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <link rel="stylesheet" href="{% static 'polls/styl3.css' %}">
+    
 </head>
 <body>
+    <div class="navbar">
+        <div class="navbar-secrion">
+            <a href="/polls"><h1>Spork Polls</h1></button></a>
+            
+        </div>
+        <div>
+            <a href="/polls/recent"><button class="button-1">Recent 5 polls</button></a>
+            <a href="/polls/daily"><button class="button-1">Daily poll</button></a>
+            <a href="/polls/random"><button class="button-1">Rnadom polls</button></a>
+            <a href="/polls/popular"><button class="button-1">Popular polls</button></a>
+            <a href="/polls/list"><button class="button-1">All polls</button></a>
+            <!-- <a href="/polls/new"><button class="button-1">Sugest a poll</button></a> -->
+        </div>
+        
+    </div>
+
     <div class="container">
-    {% if latest_question_list %}
-        <ul>
-        {% for question in latest_question_list %}
-            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %}
     </div>
 </body>
 </html>

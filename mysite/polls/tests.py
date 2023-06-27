@@ -116,7 +116,7 @@ class QuestionIndexViewTests(TestCase):
         Questions without set answers  aren't displayed on the index page.
         """
         question_with_answers = create_question(question_text="Past question 1.", days=-30)
-        question_with_no_answers = create_question(question_text="Past question 1.", days=-30)
+        question_with_no_answers = create_question(question_text="Past question 2.", days=-30)
         create_answer(question_with_answers)
         response = self.client.get(reverse("polls:index"))
         self.assertQuerySetEqual(

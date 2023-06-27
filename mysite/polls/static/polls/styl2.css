@@ -1,0 +1,21 @@
+li a { color:red;}
+body {background: #EDF2F4 url("images/background.png") no-repeat
+}
+.container {
+width: 100%;
+height: 100%;
+}
+
+.navbar {
+    width: 100%;
+    height: 50%;
+    background-color: #8D99AE;
+    border-style: groove;
+    text-align: center;
+   
+}
+
+.button {
+    background-color: #D90429;
+    border-style: groove;
+}

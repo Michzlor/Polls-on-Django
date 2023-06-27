@@ -1,7 +1,14 @@
-li a { color:green;}
-body {background: white url("images/background.png") no-repeat
+li a { color:red;}
+body {background: white url("images/back.png") no-repeat
 }
 .container {
 width: 100%;
 height: 100%;
+}
+
+.navbar {
+    width: 100%;
+    min-height: 100px;
+    max-height: 10%;
+    background-color: burlywood;
 }

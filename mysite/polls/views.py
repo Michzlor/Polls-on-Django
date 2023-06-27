@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -5,7 +7,7 @@ from django.http import Http404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-
+from random import randrange
 
 from .models import Choice, Question
 
@@ -13,6 +15,15 @@ from .models import Choice, Question
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
+
+    def get_queryset(self):
+        pass
+
+        return 0
+                
+
+class RecentPollsView(generic.ListView):
+    template_name = "polls/polls.html"
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
@@ -27,7 +38,47 @@ class IndexView(generic.ListView):
                 to_return.append(i)
 
         return to_return
-                
+
+class DailyPollView(generic.ListView):
+    template_name = "polls/polls.html"
+    context_object_name = "latest_question_list"
+    
+    def get_queryset(self):
+        timezone.datetime.date
+        return  Question.objects.filter(pub_date__startswith = timezone.now().date())
+
+
+class PollsListView(generic.ListView):
+    template_name = "polls/list.html"
+    context_object_name = "all_question_list"
+    
+    def get_queryset(self):
+        """
+        Returns all published questions.
+        """
+        return Question.objects.all 
+
+class RandomPollView(generic.ListView):
+    template_name = "polls/polls.html"
+    context_object_name = "latest_question_list"
+
+    def get_queryset(self):
+        id = randrange(len(Question.objects.all()))
+        print('id:  ',id)
+        return Question.objects.filter(pk__exact = id+1)
+
+
+class PopularPollsView(generic.ListView):
+    template_name = "polls/popular.html"
+    context_object_name = "popular_questions_list"
+
+    def get_queryset(self):
+        """
+        Returns 5 questions with highest ammount of votes.
+        """
+
+
+        return Question.objects.all().order_by("-total_votes")[:3]
 
 
 class DetailView(generic.DetailView):
@@ -67,6 +118,8 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
+        question.total_votes += 1
+        question.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
